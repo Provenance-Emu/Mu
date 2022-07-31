@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include <stdbool.h>
+#include "../libretroBuildSystem/fixIncludes/stdbool/stdbool.h"
 #include <stdarg.h>
 #include <stdio.h>
 

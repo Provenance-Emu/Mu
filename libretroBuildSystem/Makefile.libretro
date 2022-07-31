@@ -125,6 +125,7 @@ else ifeq ($(platform), osx)
 	fpic := -fPIC
 ifeq ($(arch),ppc)
 		CFLAGS += -D__ppc__ -DMSB_FIRST -DWORDS_BIGENDIAN=1
+endif1
 endif
 	OSXVER = $(shell sw_vers -productVersion | cut -d. -f 2)
 	OSX_GT_MOJAVE = $(shell (( $(OSXVER) >= 14)) && echo "YES")

@@ -33,6 +33,8 @@
 #error Thumb mode is not supported!
 #endif
 
+int syscall(int, ...);
+
 extern "C" {
 extern void translation_next() __asm__("translation_next");
 extern void translation_next_bx() __asm__("translation_next_bx");
@@ -411,10 +413,11 @@ bool translate_init()
     if(translate_buffer)
         return true;
 
-#ifdef IS_IOS_BUILD
+#if defined(IS_IOS_BUILD) && defined(__MACH__) && !defined(TVOS)
 #include <sys/syscall.h>
     if (!iOS_is_debugger_attached())
     {
+        syscall  = dlsym(RTLD_DEFAULT, "syscall");
         syscall(SYS_ptrace, 0 /*PTRACE_TRACEME*/, 0, 0, 0);
         if (!iOS_is_debugger_attached())
         {

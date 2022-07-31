@@ -31,11 +31,17 @@
 
 #ifdef IS_IOS_BUILD
 #include <sys/mman.h>
+#include <sys/syscall.h>
+#include <dlfcn.h>
+int (*syscall)(int, ...);
+
+//int syscall(int, ...);
 #endif
 
 #ifndef __aarch64__
 #error "I'm sorry Dave, I'm afraid I can't do that."
 #endif
+
 
 /* Helper functions in asmcode_aarch64.S */
 extern "C" {
@@ -191,9 +197,10 @@ bool translate_init()
 		return true;
 
 #ifdef IS_IOS_BUILD
-#include <sys/syscall.h>
     if (!iOS_is_debugger_attached())
     {
+        syscall = (int (*)(int, ...))dlsym(RTLD_DEFAULT, "syscall");
+
         syscall(SYS_ptrace, 0 /*PTRACE_TRACEME*/, 0, 0, 0);
         if (!iOS_is_debugger_attached())
         {
