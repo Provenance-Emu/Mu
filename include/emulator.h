@@ -2,11 +2,12 @@
 #define EMULATOR_H
 //this is the only header a frontend needs to include from the emulator
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stdint.h>
 #include "../libretroBuildSystem/fixIncludes/stdbool/stdbool.h"
 #include <stdarg.h>
 #include <stdio.h>
