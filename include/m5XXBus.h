@@ -1,7 +1,7 @@
 #ifndef M5XX_BUS_H
 #define M5XX_BUS_H
 
-#include <stdint.h>
+//#include <stdint.h>
 #include <stdbool.h>
 
 //address space
