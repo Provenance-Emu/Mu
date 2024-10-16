@@ -33,7 +33,8 @@
 #include <sys/mman.h>
 #include <sys/syscall.h>
 #include <dlfcn.h>
-int (*syscall)(int, ...);
+#define syscall _syscall
+int (*_syscall)(int, ...);
 
 //int syscall(int, ...);
 #endif
